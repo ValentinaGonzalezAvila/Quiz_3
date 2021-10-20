@@ -1,0 +1,8 @@
+create view vista_ventasxregion
+as 
+select Nombre, Plataforma,Año,Genero,Editorial, region, ventas 
+from (select Nombre, Plataforma,Año,Genero,Editorial,VentasNA as Norteamerica, VentasEU as Europa, VentasJP as Japon, VentasOtros as Otros 
+from ['Ventas Videojuegos$']) vent
+unpivot(ventas 
+for region in (Norteamerica, Europa, Japon, Otros))
+as p 
